@@ -595,6 +595,13 @@ impl TextLine<'_> {
         (self.inner.wmode as u32).try_into().unwrap()
     }
 
+    /// Normalized direction of the baseline. `(1, 0)` is standard horizontal
+    /// left-to-right; rotated text has a different direction even when `wmode`
+    /// is horizontal.
+    pub fn dir(&self) -> Point {
+        self.inner.dir.into()
+    }
+
     pub fn chars(&self) -> TextCharIter<'_> {
         TextCharIter {
             next: self.inner.first_char,
